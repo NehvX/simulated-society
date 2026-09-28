@@ -1,0 +1,114 @@
+CIVITAS: GUIDE TO MAKING YOUR OWN MIX OF BEHAVIOUR AND RULES
+============================================================
+
+There are two ways to run your own mix:
+
+  EASY WAY:  double-click Civitas.bat, choose option 6, and answer the questions.
+  TYPED WAY: python main.py --trait honesty=-0.5 --rule equal_shares --set policy.education_subsidy=0.9
+
+Either way, the results open in your browser automatically (on localhost), and
+the full text report is saved in the "out" folder.
+
+
+1. PEOPLE'S BEHAVIOUR: TRAIT SHIFTS  (--trait NAME=AMOUNT)
+----------------------------------------------------------
+Shifts the average personality of the whole founding population, measured in
+standard deviations (s.d.). The shift is inherited, so children carry it too.
+
+  -1.0  much lower than normal     -0.5  lower     0  normal     +0.5  higher     +1.0  much higher
+
+  honesty            Higher: people cooperate more, cheat and steal less, respect resource
+                     quotas, and elect less corrupt mayors. Lower: fraud, bribery,
+                     embezzlement and over-harvesting rise.
+  agreeableness      Higher: kinder, less violent, take less from the shared resource,
+                     better marriages.
+  conscientiousness  Higher: more self-control; higher wages, keep jobs longer, save more,
+                     healthier and longer-lived, less crime.
+  openness           Higher: more curious; more education and innovation (a growth boost),
+                     lean politically left, more open-minded in arguments.
+  neuroticism        Higher: more anxious; more stress, more mental-health crises, more
+                     open to conspiracy theories, less happy.
+  intelligence       Higher: more education and higher wages; resists misinformation.
+  extraversion       Higher: more social contacts, more charismatic candidates.
+
+Example: a selfish population:   --trait honesty=-0.6 --trait agreeableness=-0.6
+
+
+2. THE SHARED RESOURCE RULE  (--rule NAME)
+------------------------------------------
+The town shares a renewable resource (like a fishery or farmland). The rule
+decides how much people may take and who receives the value.
+
+  open_access        No limits; everyone keeps what they take. Risk: the tragedy of the
+                     commons, where selfish people strip the resource.
+  regulated          (default) A sustainable quota per person; keep what you take.
+  equal_shares       Quota; the whole harvest is pooled and split equally among adults.
+  need_based         Quota; the harvest goes first to people who can't afford essentials.
+  private_ownership  Owners (in proportion to wealth) take 60%, workers get 40%. Well
+                     protected, but usually more unequal.
+
+
+3. ANY OTHER SETTING  (--set NAME=VALUE, or "Extra settings" in the menu)
+-------------------------------------------------------------------------
+In the menu, type several settings separated by spaces, e.g.
+    policy.education_subsidy=0.9 policy.police_per_1000=8
+
+Government policy (normal value in brackets):
+  policy.income_tax=0.26            tax rate on income above $1,000 a month
+  policy.top_tax=0.10               extra tax on income above $10,000 a month
+  policy.welfare_floor=900          guaranteed minimum income, $ per month
+  policy.ubi=0                      universal basic income per adult, $ per month
+  policy.child_benefit=150          $ per child per month
+  policy.police_per_1000=5          police officers per 1,000 residents
+  policy.education_subsidy=0.5      share of university tuition paid by the state (0 to 1)
+  policy.mental_health_pc=15        mental-health budget, $ per resident per month
+  policy.public_services_pc=320     schools, health and roads, $ per resident per month
+  policy.pension_rate=0.45          pension as a share of the average wage
+  policy.inheritance_tax=0.15       tax on estates
+
+The shared resource:
+  commons.regen_rate=0.04           how fast it regrows each month (0.025 = fragile, 0.06 = abundant)
+  commons.capacity_per_capita=60    how big it is per resident
+  commons.unit_value=400            $ earned per unit harvested
+  commons.scarcity_cost=0.6         how much dearer essentials get when it runs out (0.6 = +60%)
+
+Economy and crime:
+  economy.mean_expansion_months=84  average months between recessions
+  crime.deterrence=3                how strongly the risk of punishment deters crime
+  crime.theft_sentence=4            prison months for theft (before repeat-offender increases)
+
+Growth (what drives productivity each year):
+  growth.human_capital=0.010        payoff from education
+  growth.social_capital=0.040       payoff from everyday cooperation
+  growth.scarcity=0.040             damage from an exhausted resource
+
+Every parameter is listed with its explanation in civitas/config.py.
+
+
+4. RUN OPTIONS
+--------------
+  --years 40          how many years to simulate
+  --population 600    size of the founding population
+  --seed 42           same seed + same settings = exactly the same history
+  --tag my_mix        a label added to the output file names
+  --scenario NAME     start from a preset: boom, collapse, tragedy_of_the_commons,
+                      ostrom, corruption, knowledge_economy (your own settings are
+                      applied on top)
+
+
+5. READING THE RESULTS
+----------------------
+At the top of the dashboard you'll see the verdict (Rapid growth, Growth,
+Stagnation, Decline or Collapse), what drove it, and what to boost or fix.
+The Development tab shows the development index, its six parts, the resource
+stock and income over time. Every past result is listed at
+http://localhost:<port>/index.html (menu option 9 opens it).
+
+
+6. RECIPES TO TRY
+-----------------
+  Tragedy vs Ostrom:  --trait honesty=-0.6 --rule open_access   then   --trait honesty=-0.6 --rule equal_shares
+  Education boom:     --trait openness=0.5 --set policy.education_subsidy=1
+  Police state:       --set policy.police_per_1000=12 --set crime.theft_sentence=12
+  Fragile planet:     --set commons.regen_rate=0.025 --rule private_ownership
+  Generous welfare:   --set policy.welfare_floor=1400 --set policy.ubi=400
