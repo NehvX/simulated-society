@@ -316,8 +316,7 @@ The project started as a single 300-line script
 ([oldv.py](oldv.py)). Running it showed that its most "politically powerful"
 citizens were exactly its most prolific liars, that nobody over 22 ever got a
 job, that money was created from nothing, that children died in debt, and that
-prison sentences lasted days. [docs/ORIGINAL_CODE_REVIEW.md](docs/ORIGINAL_CODE_REVIEW.md)
-documents each bug with evidence and how the rebuild fixes it.
+prison sentences lasted days.
 
 ## Limitations
 
