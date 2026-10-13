@@ -1,3 +1,27 @@
+# Civitas in action
+
+*What one run looks like: `python main.py --seed 42` simulates a town of ~600 people for 40 years, prints a verdict in the terminal, and writes an interactive HTML dashboard.*
+
+### 1. The verdict: did this society grow or collapse?
+
+
+
+![Civitas console run: development index, growth verdict and what moved productivity](docs/images/console-run.png)
+
+### 2. The social network: echo chambers emerging
+
+
+
+![Civitas dashboard: a neighbourhood of the social network, coloured by ideology](docs/images/network-map.png)
+
+### 3. The economy: inequality, jobs and what predicts income
+
+
+
+![Civitas dashboard: the Economy tab with unemployment, inequality, Lorenz curve and income predictors](docs/images/economy-dashboard.png)
+
+---
+
 # Civitas
 
 **An agent-based simulation of a human society, in which individual behaviour
